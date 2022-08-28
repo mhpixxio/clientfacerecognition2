@@ -6,10 +6,13 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
+	"math/rand"
 	"os"
 	"path/filepath"
 	"strconv"
+	"time"
 
 	"github.com/go-sql-driver/mysql"
 
@@ -62,7 +65,7 @@ func main() {
 	clientUpdateFacesAndClusters := pbface2.NewUpdateFacesAndClustersServiceClient(conn)
 	// clientRenameCluster := pbface2.NewRenameClusterServiceClient(conn)
 	// clientMergeClusters := pbface2.NewMergeClustersServiceClient(conn)
-	// clientMoveFacesToAnotherCluster := pbface2.NewMoveFacesToAnotherClusterServiceClient(conn)
+	// clientManuallyMoveFacesToAnotherCluster := pbface2.NewManuallyMoveFacesToAnotherClusterServiceClient(conn)
 	// clientRemoveFacesFromDatabase := pbface2.NewRemoveFacesFromDatabaseServiceClient(conn)
 	// clinetRemoveFilesFromDatabase := pbface2.NewRemoveFilesFromDatabaseServiceClient(conn)
 
@@ -84,36 +87,71 @@ func main() {
 	}
 
 	//---------------------------------- start ----------------------------------
-	// //get all the files
-	// fileID := 0
-	// pathToDirectory := "../files/examples/"
-	// files, err := ioutil.ReadDir(pathToDirectory)
-	// if err != nil {
-	// 	log.Println(err)
-	// }
-	// //---------------------------------- add all new files to sql ----------------------------------
-	// //go through the files in a random order
-	// rand.Seed(time.Now().UnixNano())
-	// rand.Shuffle(len(files), func(i, j int) { files[i], files[j] = files[j], files[i] })
-	// for _, file := range files {
-	// 	pathToFile := pathToDirectory[1:] + file.Name()
-	// 	fileID++
-	// 	if !file.IsDir() {
-	// 		_, err = db.Exec("REPLACE INTO files (fileID, pathToFile, processed, forRemoval, removed) VALUES(?, ?, ?, ?, ?)", fileID, pathToFile, false, false, false)
-	// 		if err != nil {
-	// 			log.Println(err)
-	// 		}
-	// 	}
-	// }
+	fileUploadBool := false
+	if fileUploadBool {
+		//get all the files
+		fileID := 0
+		pathToDirectory := "../files/examples/"
+		files, err := ioutil.ReadDir(pathToDirectory)
+		if err != nil {
+			log.Println(err)
+		}
+		//---------------------------------- add all new files to sql ----------------------------------
+		//go through the files in a random order
+		rand.Seed(time.Now().UnixNano())
+		rand.Shuffle(len(files), func(i, j int) { files[i], files[j] = files[j], files[i] })
+		for _, file := range files {
+			pathToFile := pathToDirectory[1:] + file.Name()
+			fileID++
+			if !file.IsDir() {
+				_, err = db.Exec("REPLACE INTO files (fileID, pathToFile, processed, forRemoval, removed) VALUES(?, ?, ?, ?, ?)", fileID, pathToFile, false, false, false)
+				if err != nil {
+					log.Println(err)
+				}
+			}
+		}
+	}
 
 	_, err = clientUpdateFacesAndClusters.UpdateFacesAndClustersFunc(context.Background(), &pbface2.EmptyMessage{})
 	if err != nil {
 		log.Println(err)
 	}
 
-	_, err = clientReclustering.ReclusteringFunc(context.Background(), &pbface2.EmptyMessage{})
-	if err != nil {
-		log.Println(err)
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "111", NewPersonName: "Buscha"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11221", NewPersonName: "Christoph"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11121", NewPersonName: "Richard"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "12121", NewPersonName: "Annika"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "12", NewPersonName: "Chrissi"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11122", NewPersonName: "Tomi"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "112111", NewPersonName: "Danny"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+
+	reclusteringBool := true
+	if reclusteringBool {
+		_, err = clientReclustering.ReclusteringFunc(context.Background(), &pbface2.EmptyMessage{})
+		if err != nil {
+			log.Println(err)
+		}
 	}
 
 	//---------------------------------- just for checking the results during development: saves the files of all clusters to directories ----------------------------------
@@ -138,7 +176,7 @@ func main() {
 			log.Printf("error: %v\n", err)
 		}
 		//add all files with clusterID = newCluster.clusterID
-		os.Mkdir("../files/clusters/"+strconv.Itoa(i)+"_"+newCluster.clusterID+"/", os.ModePerm)
+		os.Mkdir("../files/clusters/"+strconv.Itoa(i)+"_"+newCluster.clusterID+"_"+newCluster.personName+"/", os.ModePerm)
 		rows, err := db.Query("SELECT * FROM faces WHERE clusterID = ?", newCluster.clusterID)
 		if err != nil {
 			log.Println(err)
@@ -158,7 +196,7 @@ func main() {
 			if err != nil {
 				log.Println(err)
 			}
-			_, err = copyfile("."+fileReturn.pathToFile, "../files/clusters/"+strconv.Itoa(i)+"_"+newCluster.clusterID+"/"+filepath.Base("."+fileReturn.pathToFile))
+			_, err = copyfile("."+fileReturn.pathToFile, "../files/clusters/"+strconv.Itoa(i)+"_"+newCluster.clusterID+"_"+newCluster.personName+"/"+filepath.Base("."+fileReturn.pathToFile))
 			if err != nil {
 				log.Println(err)
 			}
