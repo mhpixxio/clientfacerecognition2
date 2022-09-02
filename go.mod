@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/go-sql-driver/mysql v1.6.0
-	github.com/mhpixxio/pbface2 v0.0.0-20220825141816-1a6a35a8574a
+	github.com/mhpixxio/pbface2 v0.0.0-20220829104756-7b83c43ee92b
 	google.golang.org/grpc v1.49.0
 )
 

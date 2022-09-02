@@ -64,6 +64,7 @@ func main() {
 	clientReclustering := pbface2.NewReclusteringServiceClient(conn)
 	clientUpdateFacesAndClusters := pbface2.NewUpdateFacesAndClustersServiceClient(conn)
 	// clientRenameCluster := pbface2.NewRenameClusterServiceClient(conn)
+	// clientDeleteAllPersonNames := pbface2.NewDeleteAllPersonNamesServiceClient(conn)
 	// clientMergeClusters := pbface2.NewMergeClustersServiceClient(conn)
 	// clientManuallyMoveFacesToAnotherCluster := pbface2.NewManuallyMoveFacesToAnotherClusterServiceClient(conn)
 	// clientRemoveFacesFromDatabase := pbface2.NewRemoveFacesFromDatabaseServiceClient(conn)
@@ -87,12 +88,25 @@ func main() {
 	}
 
 	//---------------------------------- start ----------------------------------
-	fileUploadBool := false
+	fileUploadBool := true
 	if fileUploadBool {
 		//get all the files
 		fileID := 0
 		pathToDirectory := "../files/examples/"
 		files, err := ioutil.ReadDir(pathToDirectory)
+		if err != nil {
+			log.Println(err)
+		}
+		//---------------------------------- delete all entries ----------------------------------
+		_, err = db.Exec("DELETE FROM faceclusters")
+		if err != nil {
+			log.Println(err)
+		}
+		_, err = db.Exec("DELETE FROM faces")
+		if err != nil {
+			log.Println(err)
+		}
+		_, err = db.Exec("DELETE FROM files")
 		if err != nil {
 			log.Println(err)
 		}
@@ -112,24 +126,38 @@ func main() {
 		}
 	}
 
+	// _, err = db.Exec("UPDATE faces SET personName=?", "")
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = db.Exec("UPDATE faces SET clusterID=?", "")
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+
 	_, err = clientUpdateFacesAndClusters.UpdateFacesAndClustersFunc(context.Background(), &pbface2.EmptyMessage{})
 	if err != nil {
 		log.Println(err)
 	}
 
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "111", NewPersonName: "Buscha"})
+	// _, err = clientDeleteAllPersonNames.DeleteAllPersonNamesFunc(context.Background(), &pbface2.EmptyMessage{})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11221", NewPersonName: "Christoph"})
+
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11221", NewPersonName: "Buscha"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11121", NewPersonName: "Richard"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11212", NewPersonName: "Christoph"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "12121", NewPersonName: "Annika"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11", NewPersonName: "Richard"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "122", NewPersonName: "Annika"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
@@ -137,20 +165,42 @@ func main() {
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11122", NewPersonName: "Tomi"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "112111", NewPersonName: "Tomi"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "112111", NewPersonName: "Danny"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11111", NewPersonName: "Danny"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "1111121", NewPersonName: "Kristina"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "111121", NewPersonName: "Felix"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "1111221", NewPersonName: "Michael"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "1122", NewPersonName: "Lennard"})
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "1121", NewPersonName: "Kiri"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
 
-	reclusteringBool := true
+	reclusteringBool := false
 	if reclusteringBool {
-		_, err = clientReclustering.ReclusteringFunc(context.Background(), &pbface2.EmptyMessage{})
-		if err != nil {
-			log.Println(err)
+		for i := 0; i < 1; i++ {
+			_, err = clientReclustering.ReclusteringFunc(context.Background(), &pbface2.EmptyMessage{})
+			if err != nil {
+				log.Println(err)
+			}
 		}
 	}
 
@@ -196,7 +246,7 @@ func main() {
 			if err != nil {
 				log.Println(err)
 			}
-			_, err = copyfile("."+fileReturn.pathToFile, "../files/clusters/"+strconv.Itoa(i)+"_"+newCluster.clusterID+"_"+newCluster.personName+"/"+filepath.Base("."+fileReturn.pathToFile))
+			_, err = copyFile("."+fileReturn.pathToFile, "../files/clusters/"+strconv.Itoa(i)+"_"+newCluster.clusterID+"_"+newCluster.personName+"/"+filepath.Base("."+fileReturn.pathToFile))
 			if err != nil {
 				log.Println(err)
 			}
@@ -206,7 +256,7 @@ func main() {
 	}
 }
 
-func copyfile(src, dst string) (int64, error) {
+func copyFile(src, dst string) (int64, error) {
 	sourceFileStat, err := os.Stat(src)
 	if err != nil {
 		return 0, err

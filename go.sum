@@ -27,6 +27,8 @@ github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/go-cmp v0.5.6 h1:BKbKCqvP6I+rmFHt06ZmyQtvB8xAkWdhFyr0ZUNZcxQ=
 github.com/mhpixxio/pbface2 v0.0.0-20220825141816-1a6a35a8574a h1:xu+9ZfgXjOOD1aARdjuExu5Gn5s9OjUUcTThb77PKKk=
 github.com/mhpixxio/pbface2 v0.0.0-20220825141816-1a6a35a8574a/go.mod h1:k7q0areC6/lgU6RYtSh5bKAtLJnv60Q0tuC8Q2oRmSo=
+github.com/mhpixxio/pbface2 v0.0.0-20220829104756-7b83c43ee92b h1:0DykDqpDnVAV7b6l6ErKvcbyC1LEFtlBmk0R0LGYhF0=
+github.com/mhpixxio/pbface2 v0.0.0-20220829104756-7b83c43ee92b/go.mod h1:k7q0areC6/lgU6RYtSh5bKAtLJnv60Q0tuC8Q2oRmSo=
 github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4/go.mod h1:xMI15A0UPsDsEKsMN9yxemIoYk6Tm2C1GtYGdfGttqA=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
