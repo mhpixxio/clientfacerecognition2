@@ -88,7 +88,7 @@ func main() {
 	}
 
 	//---------------------------------- start ----------------------------------
-	fileUploadBool := true
+	fileUploadBool := false
 	if fileUploadBool {
 		//get all the files
 		fileID := 0
@@ -194,7 +194,7 @@ func main() {
 	// 	log.Println(err)
 	// }
 
-	reclusteringBool := false
+	reclusteringBool := true
 	if reclusteringBool {
 		for i := 0; i < 1; i++ {
 			_, err = clientReclustering.ReclusteringFunc(context.Background(), &pbface2.EmptyMessage{})
