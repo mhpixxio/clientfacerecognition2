@@ -145,51 +145,51 @@ func main() {
 	// 	log.Println(err)
 	// }
 
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11221", NewPersonName: "Buscha"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "122111", NewPersonName: "Buscha"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11212", NewPersonName: "Christoph"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11", NewPersonName: "Christoph"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11", NewPersonName: "Richard"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "111", NewPersonName: "Richard"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "122", NewPersonName: "Annika"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "1212", NewPersonName: "Annika"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "12", NewPersonName: "Chrissi"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "12121", NewPersonName: "Chrissi"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "112111", NewPersonName: "Tomi"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "12", NewPersonName: "Tomi"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "11111", NewPersonName: "Danny"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "1221", NewPersonName: "Danny"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "1111121", NewPersonName: "Kristina"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "122221", NewPersonName: "Kristina"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "111121", NewPersonName: "Felix"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "12122", NewPersonName: "Simone"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "1111221", NewPersonName: "Michael"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "122112", NewPersonName: "Michael"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "1122", NewPersonName: "Lennard"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "111121", NewPersonName: "Lennard"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
-	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "1121", NewPersonName: "Kiri"})
+	// _, err = clientRenameCluster.RenameClusterFunc(context.Background(), &pbface2.RenameClusterMessage{ClusterID: "122211", NewPersonName: "Kiri"})
 	// if err != nil {
 	// 	log.Println(err)
 	// }
@@ -222,7 +222,7 @@ func main() {
 		newClusterMeanVector := [128]float32{}
 		newCluster.meanVector = newClusterMeanVector[:]
 		err = rows.Scan(&newCluster.clusterID, &newCluster.personName, &newCluster.numberFaces, &newCluster.meanVector[0], &newCluster.meanVector[1], &newCluster.meanVector[2], &newCluster.meanVector[3], &newCluster.meanVector[4], &newCluster.meanVector[5], &newCluster.meanVector[6], &newCluster.meanVector[7], &newCluster.meanVector[8], &newCluster.meanVector[9], &newCluster.meanVector[10], &newCluster.meanVector[11], &newCluster.meanVector[12], &newCluster.meanVector[13], &newCluster.meanVector[14], &newCluster.meanVector[15], &newCluster.meanVector[16], &newCluster.meanVector[17], &newCluster.meanVector[18], &newCluster.meanVector[19], &newCluster.meanVector[20], &newCluster.meanVector[21], &newCluster.meanVector[22], &newCluster.meanVector[23], &newCluster.meanVector[24], &newCluster.meanVector[25], &newCluster.meanVector[26], &newCluster.meanVector[27], &newCluster.meanVector[28], &newCluster.meanVector[29], &newCluster.meanVector[30], &newCluster.meanVector[31], &newCluster.meanVector[32], &newCluster.meanVector[33], &newCluster.meanVector[34], &newCluster.meanVector[35], &newCluster.meanVector[36], &newCluster.meanVector[37], &newCluster.meanVector[38], &newCluster.meanVector[39], &newCluster.meanVector[40], &newCluster.meanVector[41], &newCluster.meanVector[42], &newCluster.meanVector[43], &newCluster.meanVector[44], &newCluster.meanVector[45], &newCluster.meanVector[46], &newCluster.meanVector[47], &newCluster.meanVector[48], &newCluster.meanVector[49], &newCluster.meanVector[50], &newCluster.meanVector[51], &newCluster.meanVector[52], &newCluster.meanVector[53], &newCluster.meanVector[54], &newCluster.meanVector[55], &newCluster.meanVector[56], &newCluster.meanVector[57], &newCluster.meanVector[58], &newCluster.meanVector[59], &newCluster.meanVector[60], &newCluster.meanVector[61], &newCluster.meanVector[62], &newCluster.meanVector[63], &newCluster.meanVector[64], &newCluster.meanVector[65], &newCluster.meanVector[66], &newCluster.meanVector[67], &newCluster.meanVector[68], &newCluster.meanVector[69], &newCluster.meanVector[70], &newCluster.meanVector[71], &newCluster.meanVector[72], &newCluster.meanVector[73], &newCluster.meanVector[74], &newCluster.meanVector[75], &newCluster.meanVector[76], &newCluster.meanVector[77], &newCluster.meanVector[78], &newCluster.meanVector[79], &newCluster.meanVector[80], &newCluster.meanVector[81], &newCluster.meanVector[82], &newCluster.meanVector[83], &newCluster.meanVector[84], &newCluster.meanVector[85], &newCluster.meanVector[86], &newCluster.meanVector[87], &newCluster.meanVector[88], &newCluster.meanVector[89], &newCluster.meanVector[90], &newCluster.meanVector[91], &newCluster.meanVector[92], &newCluster.meanVector[93], &newCluster.meanVector[94], &newCluster.meanVector[95], &newCluster.meanVector[96], &newCluster.meanVector[97], &newCluster.meanVector[98], &newCluster.meanVector[99], &newCluster.meanVector[100], &newCluster.meanVector[101], &newCluster.meanVector[102], &newCluster.meanVector[103], &newCluster.meanVector[104], &newCluster.meanVector[105], &newCluster.meanVector[106], &newCluster.meanVector[107], &newCluster.meanVector[108], &newCluster.meanVector[109], &newCluster.meanVector[110], &newCluster.meanVector[111], &newCluster.meanVector[112], &newCluster.meanVector[113], &newCluster.meanVector[114], &newCluster.meanVector[115], &newCluster.meanVector[116], &newCluster.meanVector[117], &newCluster.meanVector[118], &newCluster.meanVector[119], &newCluster.meanVector[120], &newCluster.meanVector[121], &newCluster.meanVector[122], &newCluster.meanVector[123], &newCluster.meanVector[124], &newCluster.meanVector[125], &newCluster.meanVector[126], &newCluster.meanVector[127])
-		if err != nil && err != sql.ErrNoRows {
+		if err != nil {
 			log.Printf("error: %v\n", err)
 		}
 		//add all files with clusterID = newCluster.clusterID
